@@ -1,0 +1,32 @@
+#!/bin/bash
+
+echo "Hello"
+
+echo "registerCompany (companyCRN, companyName, Location, organisationRole) - Manufacturer"
+peer chaincode invoke -o orderer.pharma-network.com:7050 -C pharmachannel -n pharmanet -c'{"Args":["org.pharma-network.pharmanet:registerCompany","1234567891","Company1","Bangalore","manufacturer"]}'
+
+sleep 5
+echo "registerCompany (companyCRN, companyName, Location, organisationRole) - Distributor"
+peer chaincode invoke -o orderer.pharma-network.com:7050 -C pharmachannel -n pharmanet -c'{"Args":["org.pharma-network.pharmanet:registerCompany","1234567892","Company2","Bangalore","distributor"]}'
+
+sleep 5
+echo "registerCompany (companyCRN, companyName, Location, organisationRole) - Retailer"
+peer chaincode invoke -o orderer.pharma-network.com:7050 -C pharmachannel -n pharmanet -c'{"Args":["org.pharma-network.pharmanet:registerCompany","1234567893","Company3","Bangalore","retailer"]}'
+
+sleep 5
+echo "registerCompany (companyCRN, companyName, Location, organisationRole) - Transporter"
+peer chaincode invoke -o orderer.pharma-network.com:7050 -C pharmachannel -n pharmanet -c'{"Args":["org.pharma-network.pharmanet:registerCompany","1234567894","Company4","Bangalore","transporter"]}'
+
+sleep 5
+
+echo "addDrug(name, aadharNo)"
+peer chaincode invoke -o orderer.pharma-network.com:7050 -C pharmachannel -n pharmanet -c'{"Args":["org.pharma-network.pharmanet:addDrug","medicine1","serial1","02112020","02112022","1234567891"]}'
+
+sleep 5
+echo "createPO"
+peer chaincode invoke -o orderer.pharma-network.com:7050 -C pharmachannel -n pharmanet -c'{"Args":["org.pharma-network.pharmanet:createPO","1234567892","1234567891","medicine1","2"]}'
+
+sleep 5
+
+echo "createShipment(name, aadharNo, bankTransactionID)"
+peer chaincode invoke -o orderer.pharma-network.com:7050 -C pharmachannel -n pharmanet -c'{"Args":["org.pharma-network.pharmanet:createShipment","1234567892","medicine1","serial1","1234567894"]}'

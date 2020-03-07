@@ -1,0 +1,248 @@
+---
+#
+# The network connection profile provides client applications the information about the target
+# blockchain network that are necessary for the applications to interact with it. These are all
+# knowledge that must be acquired from out-of-band sources. This file provides such a source.
+#
+name: "network_pharma-registration"
+
+x-type: "hlfv1"
+
+description: "Pharma  Network"
+
+version: "1.0"
+
+client:
+  organization: retailer
+  connection:
+    timeout:
+      peer:
+        endorser: 300
+        eventHub: 300
+        eventReg: 300
+      orderer: 300
+
+channels:
+  pharmachannel:
+    orderers:
+      - orderer.pharma-network.com
+    peers:
+      peer0.manufacturer.pharma-network.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer1.manufacturer.pharma-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer0.distributor.pharma-network.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer1.distributor.pharma-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer0.retailer.pharma-network.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer1.retailer.pharma-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer0.transporter.pharma-network.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer1.transporter.pharma-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+      peer0.consumer.pharma-network.com:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      peer1.consumer.pharma-network.com:
+        endorsingPeer: false
+        chaincodeQuery: false
+        ledgerQuery: true
+        eventSource: false
+
+organizations:
+manufacturer:
+    mspid: manufacturerMSP
+    peers:
+      - peer0.manufacturer.pharma-network.com
+      - peer1.manufacturer.pharma-network.com
+    certificateAuthorities:
+      - ca.manufacturer.pharma-network.com
+distributor:
+    mspid: distributorMSP
+    peers:
+      - peer0.distributor.pharma-network.com
+      - peer1.distributor.pharma-network.com
+    certificateAuthorities:
+      - ca.distributor.pharma-network.com
+retailer:
+    mspid: retailerMSP
+    peers:
+      - peer0.retailer.pharma-network.com
+      - peer1.retailer.pharma-network.com
+    certificateAuthorities:
+      - ca.retailer.pharma-network.com
+transporter:
+    mspid: transporterMSP
+    peers:
+      - peer0.transporter.pharma-network.com
+      - peer1.transporter.pharma-network.com
+    certificateAuthorities:
+      - ca.transporter.pharma-network.com
+consumer:
+    mspid: consumerMSP
+    peers:
+      - peer0.consumer.pharma-network.com
+      - peer1.consumer.pharma-network.com
+    certificateAuthorities:
+      - ca.consumer.pharma-network.com
+
+orderers:
+  orderer.pharma-network.com:
+    url: grpc://localhost:7050
+    grpcOptions:
+      ssl-target-name-override: orderer.pharma-network.com
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/ordererOrganizations/pharma-network.com/orderers/orderer.pharma-network.com/msp/tlscacerts/tlsca.pharma-network.com-cert.pem
+
+peers:
+  peer0.manufacturer.pharma-network.com:
+    url: grpc://localhost:7051
+    grpcOptions:
+      ssl-target-name-override: peer0.manufacturer.pharma-network.com
+      request-timeout: 120001
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/manufacturer.pharma-network.com/peers/peer0.manufacturer.pharma-network.com/msp/tlscacerts/tlsca.manufacturer.pharma-network.com-cert.pem
+  peer1.manufacturer.pharma-network.com:
+    url: grpc://localhost:8051
+    grpcOptions:
+      ssl-target-name-override: peer1.manufacturer.pharma-network.com
+      request-timeout: 120001
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/manufacturer.pharma-network.com/peers/peer1.manufacturer.pharma-network.com/msp/tlscacerts/tlsca.manufacturer.pharma-network.com-cert.pem
+  peer0.distributor.pharma-network.com:
+    url: grpc://localhost:9051
+    grpcOptions:
+      ssl-target-name-override: peer0.distributor.pharma-network.com
+      request-timeout: 120001
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/users.pharma-network.com/peers/peer0.users.pharma-network.com/msp/tlscacerts/tlsca.users.pharma-network.com-cert.pem
+  peer1.distributor.pharma-network.com:
+    url: grpc://localhost:10051
+    grpcOptions:
+      ssl-target-name-override: peer1.distributor.pharma-network.com
+      request-timeout: 120001
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/users.pharma-network.com/peers/peer1.users.pharma-network.com/msp/tlscacerts/tlsca.users.pharma-network.com-cert.pem
+  peer0.retailer.pharma-network.com:
+    url: grpc://localhost:9051
+    grpcOptions:
+      ssl-target-name-override: peer0.retailer.pharma-network.com
+      request-timeout: 120001
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/users.pharma-network.com/peers/peer0.users.pharma-network.com/msp/tlscacerts/tlsca.users.pharma-network.com-cert.pem
+  peer1.retailer.pharma-network.com:
+    url: grpc://localhost:10051
+    grpcOptions:
+      ssl-target-name-override: peer1.retailer.pharma-network.com
+      request-timeout: 120001
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/users.pharma-network.com/peers/peer1.users.pharma-network.com/msp/tlscacerts/tlsca.users.pharma-network.com-cert.pem
+  peer0.transporter.pharma-network.com:
+    url: grpc://localhost:9051
+    grpcOptions:
+      ssl-target-name-override: peer0.transporter.pharma-network.com
+      request-timeout: 120001
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/users.pharma-network.com/peers/peer0.users.pharma-network.com/msp/tlscacerts/tlsca.users.pharma-network.com-cert.pem
+  peer1.transporter.pharma-network.com:
+    url: grpc://localhost:10051
+    grpcOptions:
+      ssl-target-name-override: peer1.transporter.pharma-network.com
+      request-timeout: 120001
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/users.pharma-network.com/peers/peer1.users.pharma-network.com/msp/tlscacerts/tlsca.users.pharma-network.com-cert.pem
+  peer0.consumer.pharma-network.com:
+    url: grpc://localhost:9051
+    grpcOptions:
+      ssl-target-name-override: peer0.consumer.pharma-network.com
+      request-timeout: 120001
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/users.pharma-network.com/peers/peer0.users.pharma-network.com/msp/tlscacerts/tlsca.users.pharma-network.com-cert.pem
+  peer1.consumer.pharma-network.com:
+    url: grpc://localhost:10051
+    grpcOptions:
+      ssl-target-name-override: peer1.consumer.pharma-network.com
+      request-timeout: 120001
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/users.pharma-network.com/peers/peer1.users.pharma-network.com/msp/tlscacerts/tlsca.users.pharma-network.com-cert.pem
+
+certificateAuthorities:
+  ca.manufacturer.pharma-network.com:
+    url: http://localhost:7054
+    httpOptions:
+      verify: false
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/manufacturer.pharma-network.com/ca/ca.manufacturer.pharma-network.com-cert.pem
+    manufacturer:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.manufacturer.pharma-network.com
+  ca.distributor.pharma-network.com:
+    url: http://localhost:8054
+    httpOptions:
+      verify: false
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/users.pharma-network.com/ca/ca.users.pharma-network.com-cert.pem
+    manufacturer:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.distributor.pharma-network.com
+  ca.retailer.pharma-network.com:
+    url: http://localhost:8054
+    httpOptions:
+      verify: false
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/users.pharma-network.com/ca/ca.users.pharma-network.com-cert.pem
+    manufacturer:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.retailer.pharma-network.com
+  ca.transporter.pharma-network.com:
+    url: http://localhost:8054
+    httpOptions:
+      verify: false
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/users.pharma-network.com/ca/ca.users.pharma-network.com-cert.pem
+    manufacturer:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.transporter.pharma-network.com
+  ca.consumer.pharma-network.com:
+    url: http://localhost:8054
+    httpOptions:
+      verify: false
+    # tlsCACerts:
+    #   path: /home/upgrad/workspace/drug-counterfeiting/network/crypto-config/peerOrganizations/users.pharma-network.com/ca/ca.users.pharma-network.com-cert.pem
+    manufacturer:
+      - enrollId: admin
+        enrollSecret: adminpw
+    caName: ca.consumer.pharma-network.com
