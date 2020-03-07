@@ -5,10 +5,8 @@ Pharma Network
 Smart Contract Solution Document
 
 Manufacture, Distribute and Retail the drug in smart and secure way
-Saikumar K
 
-2/17/2020
-
+Author: Saikumar K
 
 
 Document contains step by step guide to user who would like to understand different methods available implemented in the smart contracts and execute to understand the output.
